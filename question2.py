@@ -62,6 +62,7 @@ class BinarySearchTree:
         if not src or not dst: # if either of the nodes is None, return empty list
             return []
 
+        # find the lowest common ancestor
         def find_lca(node, n1, n2):
             if not node:
                 return None
@@ -76,10 +77,11 @@ class BinarySearchTree:
         if not lca:
             return []
 
+        # find the path from node to the node
         def find_path_to_node(node, key):
             path = []
             while node:
-                path.append(node)
+                path = [node] + path
                 if node.key == key:
                     break
                 if node.key > key:
@@ -88,8 +90,8 @@ class BinarySearchTree:
                     node = node.rightChild
             return path
 
-        path1 = find_path_to_node(lca, element_1_key)
-        path2 = find_path_to_node(lca, element_2_key)
+        path1 = find_path_to_node(lca, element_1_key) # find the path from lca to element_1
+        path2 = find_path_to_node(lca, element_2_key) # reverse the path2 and remove the first element
 
         return path1 + path2[::-1][1:]
 
