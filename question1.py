@@ -18,13 +18,13 @@ class HashTable:
         """
         hashvalue = self.hashfunction(key, len(self.slots)) # compute the hashvalue of the key
 
-        if self.slots[hashvalue] is None: # there is no collision
+        if not self.slots[hashvalue]: # there is no collision
             self.slots[hashvalue] = OrderedList() # create a linked list at the slot at hashvalue
             self.slots[hashvalue].add(key, data) # add the key-data pair to the linked list
             self.occupied_slots += 1 # increment the number of occupied slots
         else:
             tmp = self.slots[hashvalue].search(key) # search for the key in the linked list of the slot at hashvalue
-            if tmp is None: # if the key is not found in the linked list
+            if not tmp: # if the key is not found in the linked list
                 self.slots[hashvalue].add(key, data) # add the key-data pair to the linked list
             else:
                 tmp.setData(data) # if the key is found, update the data of the key
